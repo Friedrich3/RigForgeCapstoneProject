@@ -1,5 +1,5 @@
 
-<div align="center">
+<div>
 
   <img src="./src/assets/img/iconv3.png" alt="logo" width="200" height="auto" />
   <h1>RigForge Pc Builder</h1>
