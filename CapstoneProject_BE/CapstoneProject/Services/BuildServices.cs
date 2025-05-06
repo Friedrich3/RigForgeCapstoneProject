@@ -126,8 +126,9 @@ namespace CapstoneProject.Services
                 } : null,
                 Gpu = build.Gpu != null ? new ComponentDetailDto()
                 {
+                    
                     Id = build.Gpu.GpuId,
-                    Name = build.Gpu.Name,
+                    Name = $"{build.Gpu.Name} {build.Gpu.Chipset}" ,
                     Price = build.Gpu.Price,
                     Image = build.Gpu.Image,
                 } : null,
@@ -163,6 +164,15 @@ namespace CapstoneProject.Services
                 MaxBuildWattage = build.PowerSupply != null ? build.PowerSupply.Wattage : null,
             };
             return buildDetail;
+        }
+        private string manageGpuName(string gpuName, string gpuChipset)
+        {
+            if (string.IsNullOrWhiteSpace(gpuName) || string.IsNullOrWhiteSpace(gpuChipset))
+            {
+                return gpuName;
+            }
+            var nameParts = gpuName.Split(" ", 2);
+            return nameParts.Length == 2 ? $"{nameParts[0]} {gpuChipset} {nameParts[1]}" : $"{gpuName} {gpuChipset}" ;
         }
 
         public async Task<bool> EditSingleComponentAsync(string userEmail, UpdateBuildComponentDto dto)
