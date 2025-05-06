@@ -1,7 +1,7 @@
 
 <div>
 
-  <img src="./src/assets/img/iconv3.png" alt="logo" width="200" height="auto" />
+  <img src="./CapstoneProject_FE/CapstoneProject/src/assets/img/iconv3.png" alt="logo" width="200" height="auto" />
   <h1>RigForge Pc Builder</h1>
   
   <p>
@@ -28,7 +28,7 @@
 ## About the Project
 
 <div align="center"> 
-  <img src="./src/assets/img/screenshot.png" alt="screenshot" />
+  <img src="./CapstoneProject_FE/CapstoneProject/src/assets/img/screenshot.png" alt="screenshot" />
   <p>RigForge is designed for PC enthusiasts who want to experiment with custom builds, track component compatibility, and discover configurations made by the community. It features both guest and authenticated user flows, a live product catalog, and a build gallery system.
 </p>
 </div>
