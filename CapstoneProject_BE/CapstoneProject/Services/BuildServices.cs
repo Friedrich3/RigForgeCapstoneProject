@@ -128,7 +128,7 @@ namespace CapstoneProject.Services
                 {
                     
                     Id = build.Gpu.GpuId,
-                    Name = $"{build.Gpu.Name} {build.Gpu.Chipset}" ,
+                    Name = manageGpuName(build.Gpu.Name, build.Gpu.Chipset),
                     Price = build.Gpu.Price,
                     Image = build.Gpu.Image,
                 } : null,
