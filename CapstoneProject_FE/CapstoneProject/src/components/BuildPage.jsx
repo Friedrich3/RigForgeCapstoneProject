@@ -8,10 +8,12 @@ import {
   ListGroup,
   Badge,
   NavLink,
+  Modal,
 } from "react-bootstrap";
 import {
   Amazon,
   ArrowCounterclockwise,
+  BoxArrowUpRight,
   Cart,
   Check,
   InfoCircle,
@@ -23,15 +25,18 @@ import {
 } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { NewBuild, RemoveComponent, RemoveComponentApi, ResetBuildFromApi, StartupLoadFromApi } from "../redux/actions/BuildApi";
+import { ExportToText, NewBuild, RemoveComponent, RemoveComponentApi, ResetBuildFromApi, StartupLoadFromApi } from "../redux/actions/BuildApi";
 import { normalizeImagePath } from "../redux/actions/ProductsApi";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const BuildPage = () => {
   const currentUser = useSelector((state) => state.profile.data);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const currentBuild = useSelector((state) => state.build.data);
+
+  const [showExport,setShowExport] = useState(false);
+  const [exportBuild, setExportBuild] = useState("")
 
 
 
@@ -151,10 +156,56 @@ const BuildPage = () => {
   }
   
 
+  const exportModal = () => {
+    return (
+      <>
+        <Modal show={showExport} onHide={()=>{setShowExport(false)}} className="" size="lg" data-bs-theme="dark">
+            <Modal.Header closeButton className="">
+            <Modal.Title>Export Custom Build - Copy and Paste to share the build info </Modal.Title>
+            </Modal.Header>
+            <Modal.Body style={{ backgroundColor: "#121225" }} className="">
+            <Form onSubmit={(e) => {e.preventDefault()}}>
+                <Form.Group className="mb-3">
+                <Form.Label className="">Description</Form.Label>
+                <Form.Control
+                    as="textarea"
+                    rows={20}
+                    placeholder=""
+                    className=""
+                    value={exportBuild}
+                    autoFocus
+                    onChange={(e)=>{setExportBuild(e.target.value)}}
+                />
+                </Form.Group>
+            </Form>
+            </Modal.Body>
+            <Modal.Footer style={{ backgroundColor: "#121225" }} className="">
+            <Button variant="secondary" type="button" onClick={()=>{setShowExport(false)}}>
+                Close
+            </Button>
+            <Button variant="primary" type="button" onClick={()=>{}} >
+                Copy to Clipboard
+            </Button>
+            </Modal.Footer>
+        </Modal>
+        </>
+    )
+  }
+  const handleExport = ()=>{
+    if(currentUser.email && currentUser.role){
+      setExportBuild(ExportToText(currentBuild));
+    }else{
+      setExportBuild(ExportToText(currentBuild, calculateTotalPrice(currentBuild)))
+    }
+      setShowExport(true)
+  }
+
 
 
   return (
+    
     <Container className="py-4">
+      <>{exportModal()}</>
       <Row>
         <Col lg={9}>
           <Card
@@ -170,8 +221,11 @@ const BuildPage = () => {
                   <Button as={Link} to={"/Account/login"} variant="outline-light " size="sm" className="me-2 opacity-75" ><Save className="me-1" /> Login to Save Build</Button>
                 }
                 {/* TODO: WINDOW PERSONALIZZATA PER LA CANCELLAZIONE DELLA BUILD */}
-                <Button variant="outline-light" className="opacity-75 " size="sm"onClick={handleResetBuild}>
+                <Button variant="outline-light" className="opacity-75 me-1 " size="sm"onClick={handleResetBuild}>
                   <ArrowCounterclockwise className="me-1 align-center"/> Reset Build
+                </Button>
+                <Button variant="outline-light" className="opacity-75" size="sm" onClick={handleExport}>
+                  <BoxArrowUpRight className="me-1 text-center pb-1"/> Export Build
                 </Button>
               </div>
             </Card.Header>
