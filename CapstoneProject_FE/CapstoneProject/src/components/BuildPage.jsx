@@ -165,8 +165,7 @@ const BuildPage = () => {
               <h5 className="mb-0">{currentUser.role ? `${currentBuild.name}`: currentBuild.name? `${currentBuild.name}`:`Current Build` }</h5>
               <div>
                 {currentUser.role ?
-                //TODO : AL CLICK SAVE DELLA BUILD NELLA TABELLA USER BUILD edit: LE BUILD SI MODIFICANO IN AUTOMATICO
-                  <></>    // <Button variant="outline-light " size="sm" className="me-2 opacity-75"><Save className="me-1" /> Save Build</Button>
+                  <></>
                   :
                   <Button as={Link} to={"/Account/login"} variant="outline-light " size="sm" className="me-2 opacity-75" ><Save className="me-1" /> Login to Save Build</Button>
                 }
@@ -182,16 +181,12 @@ const BuildPage = () => {
                 {componentCategories.map((category) => (
                   <ListGroup.Item
                     key={category.id}
-                    className="d-flex align-items-center border-bottom border-secondary py-3"
+                    className="align-items-center border-bottom border-secondary py-3 d-xl-flex "
                     style={{ backgroundColor: "#121225" }}
                   >
-                    {/* <div className="d-flex align-items-center" style={{ width: "40px" }}>
-                      <Form.Check type="checkbox" checked={!!category.selected} readOnly className="me-2" />
-                    </div> */}
-
                     <div
-                      className="d-flex align-items-center"
-                      style={{ width: "150px" }}
+                      className="d-flex align-items-center col-xl-2 pb-lg-1"
+                      //style={{ width: "150px" }}
                     >
                       <span className="text-light custom-truncate">
                         <img

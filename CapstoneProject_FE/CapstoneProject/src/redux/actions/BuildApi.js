@@ -234,3 +234,20 @@ export const CloneBuildAuthorize = async (buildId) =>{
         return false;
     }
 }
+
+export const ExportToText = (build) =>{
+    const url = `${window.location.origin}/products/` //http://localhost:5173/products/cpu/ee865c82-f43d-4a0c-abbc-1f0f810d6227
+    return `Build Name: ${build.name || 'Custom Build'}
+
+**CPU**: ${build.cpu?.name || 'N/A'} ${build.cpu?.name? `[${url}cpu/${build.cpu?.id}]` : "" }
+**Motherboard**: ${build.motherboard?.name || 'N/A'} ${build.motherboard.name? `[${url}motherboard/${build.motherboard?.id}]` : "" }
+**GPU**: ${build.gpu?.name || 'N/A'} ${build.gpu.name? `[${url}gpu/${build.gpu?.id}]` : "" }
+**RAM**: ${build.ram?.name || 'N/A'} ${build.ram.name? `[${url}ram/${build.ram?.id}]` : "" }
+**Storage**: ${build.storage?.name || 'N/A'} ${build.storage.name? `[${url}storage/${build.storage?.id}]` : "" }
+**CPU Cooler**: ${build.cpucooler?.name || 'N/A'} ${build.cpucooler.name? `[${url}cpucooler/${build.cpucooler?.id}]` : "" }
+**Case**: ${build.case?.name || 'N/A'} ${build.case.name? `[${url}case/${build.case?.id}]` : "" }
+**Power Supply**: ${build.powersupply?.name || 'N/A'} ${build.powersupply.name? `[${url}powersupply/${build.powersupply?.id}]` : "" }
+
+Total Price: €${build.totalPrice?.toFixed(2) || 'N/A'}
+Created: ${new Date(build.createdAt).toLocaleDateString()}`
+}
