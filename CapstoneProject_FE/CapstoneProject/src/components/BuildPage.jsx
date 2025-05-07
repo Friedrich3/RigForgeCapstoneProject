@@ -214,7 +214,7 @@ const BuildPage = () => {
           >
             <Card.Header className="bg-dark text-light border-bottom border-secondary d-flex justify-content-between align-items-center">
               <h5 className="mb-0">{currentUser.role ? `${currentBuild.name}`: currentBuild.name? `${currentBuild.name}`:`Current Build` }</h5>
-              <div>
+              <div className="d-flex">
                 {currentUser.role ?
                   <></>
                   :
