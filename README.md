@@ -123,6 +123,8 @@ Discord - friedrich_3
 
 
 Project Link: [https://github.com/Friedrich3/RigForgeCapstoneProject](https://github.com/Friedrich3/RigForgeCapstoneProject)
+Frontend Repository: [https://github.com/Friedrich3/RigForgeCapstoneProject/tree/main/CapstoneProject_FE/CapstoneProject](https://github.com/Friedrich3/RigForgeCapstoneProject/tree/main/CapstoneProject_FE/CapstoneProject)
+Backend Repository: [https://github.com/Friedrich3/RigForgeCapstoneProject/tree/main/CapstoneProject_BE](https://github.com/Friedrich3/RigForgeCapstoneProject/tree/main/CapstoneProject_BE)
 
 <!-- Acknowledgments -->
 ## Acknowledgements
