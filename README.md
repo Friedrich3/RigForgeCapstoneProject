@@ -122,7 +122,9 @@ Federico Tonti  - federico.tonti@gmail.com
 Discord - friedrich_3
 
 
-Project Link: [https://github.com/Friedrich3/RigForgeCapstoneProject](https://github.com/Friedrich3/RigForgeCapstoneProject)
+Project Link: [https://github.com/Friedrich3/RigForgeCapstoneProject](https://github.com/Friedrich3/RigForgeCapstoneProject)<br />
+Frontend Repository: [https://github.com/Friedrich3/RigForgeCapstoneProject/tree/main/CapstoneProject_FE/CapstoneProject](https://github.com/Friedrich3/RigForgeCapstoneProject/tree/main/CapstoneProject_FE/CapstoneProject)<br />
+Backend Repository: [https://github.com/Friedrich3/RigForgeCapstoneProject/tree/main/CapstoneProject_BE](https://github.com/Friedrich3/RigForgeCapstoneProject/tree/main/CapstoneProject_BE)<br />
 
 <!-- Acknowledgments -->
 ## Acknowledgements
