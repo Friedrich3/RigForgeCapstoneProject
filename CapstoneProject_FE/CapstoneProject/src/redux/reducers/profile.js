@@ -5,7 +5,8 @@ const initialObject = {
   email: null,
   role: null,
   expire: null,
-  registeredAt: null
+  registeredAt: null,
+  isGoogleAccount : null
 };
 
 const initialState = {

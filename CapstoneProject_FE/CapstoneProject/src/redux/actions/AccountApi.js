@@ -1,4 +1,5 @@
 import { jwtDecode } from "jwt-decode";
+import { Navigate } from "react-router-dom";
 
 
 
@@ -60,7 +61,8 @@ export const SetToken = () => {
                 email: token.email,
                 role: token.role,
                 expire: token.exp,
-                registeredAt : token.registeredAt
+                registeredAt : token.registeredAt,
+                isGoogleAccount : token.isGoogleAccount
             },
         });
     }
@@ -116,4 +118,27 @@ export const AutoLogin = () => {
 export const GetBearerToken = ()=>{
     const localtoken = JSON.parse(localStorage.getItem("token"))
     return localtoken.token
+}
+
+export const ChangePassword = async (form) => {
+    console.log(form)
+    const changePswUrl = "https://localhost:7099/api/Account/changePassword"
+    try {
+        const response = await fetch(changePswUrl, {
+            method: "POST",
+            headers: {
+                "Authorization": "Bearer " + GetBearerToken(),
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(form),
+        });
+        if (!response.ok) {
+            return false;
+        } else {
+            return true;
+        }
+    } catch (error) {
+        console.error("Error" , error)
+
+    }
 }

@@ -51,7 +51,8 @@ namespace CapstoneProject.Controllers
             {
                 Email = registerDto.Email,
                 UserName = registerDto.UserName,
-                RegisteredAt = DateOnly.FromDateTime(DateTime.Now)
+                RegisteredAt = DateOnly.FromDateTime(DateTime.Now),
+                GoogleAccount = false
             };
             var result = await _userManager.CreateAsync(newUser, registerDto.Password);
             if (!result.Succeeded)
@@ -110,6 +111,7 @@ namespace CapstoneProject.Controllers
             claims.Add(new Claim("email", user.Email));
             claims.Add(new Claim("username", user.UserName));
             claims.Add(new Claim("registeredAt", user.RegisteredAt.ToString("yyyy-MM-dd")));
+            claims.Add(new Claim("isGoogleAccount", user.GoogleAccount.ToString()));
 
             foreach (var role in roles)
             {
@@ -147,6 +149,7 @@ namespace CapstoneProject.Controllers
                 newUser.Email = payload.Email;
                 newUser.UserName = $"{firstName}-{new Random().Next(10000, 100000)}";
                 newUser.RegisteredAt = DateOnly.FromDateTime(DateTime.Now);
+                newUser.GoogleAccount = true;
                 
                 var result = await _userManager.CreateAsync(newUser);
                 if (!result.Succeeded)
@@ -176,6 +179,7 @@ namespace CapstoneProject.Controllers
             claims.Add(new Claim("email", user.Email));
             claims.Add(new Claim("username", user.UserName));
             claims.Add(new Claim("registeredAt", user.RegisteredAt.ToString("yyyy-MM-dd")));
+            claims.Add(new Claim("isGoogleAccount", user.GoogleAccount.ToString()));
 
             foreach (var role in roles)
             {
@@ -210,8 +214,15 @@ namespace CapstoneProject.Controllers
             }
             var email = User.Claims.FirstOrDefault(p => p.Type == ClaimTypes.Email).Value;
             if (string.IsNullOrEmpty(email)) return Unauthorized();
-            var user = await _userManager.FindByNameAsync(email);
+            var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
+            {
+                return BadRequest(new
+                {
+                    message = "Ops, something went wrong!"
+                });
+            }
+            if (user.GoogleAccount == true) 
             {
                 return BadRequest(new
                 {
