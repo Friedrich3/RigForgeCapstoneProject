@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using FluentEmail.MailKitSmtp;
+using Microsoft.Extensions.Configuration;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
@@ -54,6 +56,18 @@ try
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection(nameof(Jwt)).GetValue<string>("SecurityKey")))
         };
     });
+
+    //SERVIZIO PER EMAILs
+    builder.Services.AddFluentEmail(builder.Configuration.GetSection("MailSettings").GetValue<string>("FromDefault")).AddRazorRenderer().AddMailKitSender(new SmtpClientOptions()
+    {
+        Server = builder.Configuration.GetSection("MailSettings").GetValue<string>("Server"),
+        Port = builder.Configuration.GetSection("MailSettings").GetValue<int>("Port"),
+        User = builder.Configuration.GetSection("MailSettings").GetValue<string>("Username"),
+        Password = builder.Configuration.GetSection("MailSettings").GetValue<string>("Password"),
+        UseSsl = builder.Configuration.GetSection("MailSettings").GetValue<bool>("UseSSL"),
+        RequiresAuthentication = builder.Configuration.GetSection("MailSettings").GetValue<bool>("RequiresAuthentication"),
+    });
+    builder.Services.AddScoped<EmailServices>();
 
     builder.Services.AddScoped<UserManager<ApplicationUser>>();
     builder.Services.AddScoped<SignInManager<ApplicationUser>>();
