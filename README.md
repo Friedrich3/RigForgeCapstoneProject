@@ -1,4 +1,4 @@
-
+![Project Status: Inactive](https://shields.io)
 <div>
 
   <img src="./CapstoneProject_FE/CapstoneProject/src/assets/img/iconv3.png" alt="logo" width="200" height="auto" />
